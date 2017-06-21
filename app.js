@@ -12,7 +12,7 @@ var base58 = require('./base58.js');
 // grab the url model
 var Url = require('./models/url');
 
-mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
+mongoose.connect('mongodb://user1:123456@ds139959.mlab.com:39959/url-shortener');
 
 // handles JSON bodies
 app.use(bodyParser.json());
