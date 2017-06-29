@@ -20,6 +20,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // tell Express to serve files from our public folder
+// app.use(): 
+// Mounts the specified middleware function or functions 
+// at the specified path: the middleware function is 
+// executed when the base of the requested path matches path.
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res){
@@ -53,7 +57,7 @@ app.post('/api/shorten', function(req, res){
         }
 
         // construct the short URL
-        shortUrl = config.webhost + base58.encode(newUrl._id);
+        shortUrl = ((process.env.MONGOLAB_URI) ? config.webhost : config.db.host + ':3000/') + base58.encode(newUrl._id);
 
         res.send({'shortUrl': shortUrl});
       });
